@@ -2,8 +2,8 @@ namespace Naidis_TARpe24;
 
 public partial class StartPage : ContentPage
 {
-	public List<ContentPage> lehed = new List<ContentPage>() { new TextPage(), new FigurePage() };
-	public List<string> lehedNimed = new List<string>() { "Tekst", "Joonis" };
+	public List<ContentPage> lehed = new List<ContentPage>() { new TextPage(), new FigurePage(), new Timer_Page() };
+	public List<string> lehedNimed = new List<string>() { "Tekst", "Kujund", "Timer" };
 	ScrollView sv;
 	VerticalStackLayout vst;
     public StartPage()
@@ -15,15 +15,16 @@ public partial class StartPage : ContentPage
 			Button nupp = new Button
 			{
 				Text = lehedNimed[i],
+				FontSize = 36,
+				FontFamily ="Luffio",
 				BackgroundColor = Colors.White,
 				TextColor = Colors.Black,
 				CornerRadius = 10,
-				FontSize = 18,
-				Padding = new Thickness(10),
+				HeightRequest = 60,
 				ZIndex = i
             };
 			vst.Add(nupp);
-			nupp.Clicked += (s, e) =>
+			nupp.Clicked += (sender, e) =>
 			{
 				var valik = lehed[nupp.ZIndex];
 				Navigation.PushAsync(valik);

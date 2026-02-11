@@ -5,9 +5,20 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Naidis_TARpe24"
     Title="Naidis_TARpe24">
-
+    <Shell.TitleView>
+        <Label
+            Text="Näidis"
+            FontFamily="Luffio Regular 400"
+            FontSize="Title"
+            TextColor="DarkGoldenrod"
+            VerticalTextAlignment="Center"
+            VerticalOptions="Center"
+            HorizontalOptions="Start"
+            Padding="25,0,0,0"
+            HeightRequest="50"/>
+    </Shell.TitleView>
     <ShellContent
-        Title="Home"
+        Title="Avaleht"
         ContentTemplate="{DataTemplate local:StartPage}"
         Route="StartPage" />
 
