@@ -111,6 +111,7 @@ public partial class ValgufoorPage : ContentPage
                 roheline.Fill = new SolidColorBrush(Colors.Gray);
             }
         };
+
     }
 	private void Foorid(object? sender, EventArgs e)
 	{
@@ -139,29 +140,35 @@ public partial class ValgufoorPage : ContentPage
             kollane.Fill = new SolidColorBrush(Colors.Yellow);
             roheline.Fill = new SolidColorBrush(Colors.Yellow);
             this.BackgroundImageSource = "night.jpg";
-            roheline.GestureRecognizers.Add(new TapGestureRecognizer
+            TapGestureRecognizer 种REZIIM = new TapGestureRecognizer()
             {
-                Command = new Command(async () =>
-                {
-                    await Task.WhenAll(
-                        punane.ScaleToAsync(1.2, 150),
-                        punane.FadeToAsync(0.5, 150),
-                        kollane.ScaleToAsync(1.2, 150),
-                        kollane.FadeToAsync(0.5, 150),
-                        roheline.ScaleToAsync(1.2, 150),
-                        roheline.FadeToAsync(0.5, 150)
-                    );
-                    await Task.WhenAll(
-                        punane.ScaleToAsync(1.0, 150),
-                        punane.FadeToAsync(1.0, 150),
-                        roheline.ScaleToAsync(1.0, 150),
-                        roheline.FadeToAsync(1.0, 150),
-                        kollane.ScaleToAsync(1.0, 150),
-                        kollane.FadeToAsync(1.0, 150)
-                    );
-                    status.Text = "Seisa!";
-                })
-            });
+                Command = new Command(async () => await Animatsioon())
+            };
+
+            punane.GestureRecognizers.Add(种REZIIM);
+            kollane.GestureRecognizers.Add(种REZIIM);
+            roheline.GestureRecognizers.Add(种REZIIM);
+
         }
+    }
+    private async Task Animatsioon()
+    {
+                await Task.WhenAll(
+                    punane.ScaleToAsync(1.2, 150),
+                    punane.FadeToAsync(0.5, 150),
+                    kollane.ScaleToAsync(1.2, 150),
+                    kollane.FadeToAsync(0.5, 150),
+                    roheline.ScaleToAsync(1.2, 150),
+                    roheline.FadeToAsync(0.5, 150)
+                );
+                await Task.WhenAll(
+                    punane.ScaleToAsync(1.0, 150),
+                    punane.FadeToAsync(1.0, 150),
+                    roheline.ScaleToAsync(1.0, 150),
+                    roheline.FadeToAsync(1.0, 150),
+                    kollane.ScaleToAsync(1.0, 150),
+                    kollane.FadeToAsync(1.0, 150)
+                );
+                status.Text = "Seisa!";
     }
 }
