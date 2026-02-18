@@ -4,26 +4,18 @@ namespace Naidis_TARpe24;
 
 public partial class ValgufoorPage : ContentPage
 {
-	BoxView BoxView;
     Label status;
     bool sisse = false;
-    Ellipse foor;
 	Ellipse punane;
 	Ellipse roheline;
 	Ellipse kollane;
-	List<string> nupud = new List<string>() { "Tagasi", "Avaleht", "Edasi", "Sisse", "Välja" };
+	List<string> nupud = new List<string>() { "SISSE", "VÄLJA", "ÖÖREZIIM", };
 	HorizontalStackLayout hsl;
 	VerticalStackLayout vsl;
+
 	public ValgufoorPage()
 	{
-		BoxView = new BoxView()
-		{
-			WidthRequest = 180,
-			HeightRequest = 180,
-			BackgroundColor = Colors.Black,
-            HorizontalOptions =LayoutOptions.Center
-		};
-		punane = new Ellipse()
+        punane = new Ellipse()
 		{
             WidthRequest = 180,
             HeightRequest = 180,
@@ -31,19 +23,19 @@ public partial class ValgufoorPage : ContentPage
             StrokeThickness = 5,
             HorizontalOptions = LayoutOptions.Center
         };
-		roheline = new Ellipse()
+        kollane = new Ellipse()
+        {
+            WidthRequest = 180,
+            HeightRequest = 180,
+            Fill = new SolidColorBrush(Colors.Yellow),
+            StrokeThickness = 5,
+            HorizontalOptions = LayoutOptions.Center
+        };
+        roheline = new Ellipse()
 		{
             WidthRequest = 180,
             HeightRequest = 180,
             Fill = new SolidColorBrush(Colors.Green),
-            StrokeThickness = 5,
-            HorizontalOptions = LayoutOptions.Center
-        };
-		kollane = new Ellipse()
-		{
-            WidthRequest = 180,
-            HeightRequest = 180,
-            Fill = new SolidColorBrush(Colors.Yellow),
             StrokeThickness = 5,
             HorizontalOptions = LayoutOptions.Center
         };
@@ -64,26 +56,28 @@ public partial class ValgufoorPage : ContentPage
             nupp.Clicked += Foorid;
             hsl.Add(nupp);
         }
-        vsl = new VerticalStackLayout()
-        {
-            Padding = 20,
-            Spacing = 15,
-            Children = { BoxView, punane, roheline, kollane, hsl, status},
-            HorizontalOptions = LayoutOptions.Center
-        };
-        Content = vsl;
         status = new Label()
         {
             Text = "Vali valgus",
             FontSize = 25,
+            FontFamily = "Luffio",
             HorizontalOptions = LayoutOptions.Center
         };
+        vsl = new VerticalStackLayout()
+        {
+            Padding = 20,
+            Spacing = 15,
+            Children = {  punane, kollane, roheline, hsl, status},
+            HorizontalOptions = LayoutOptions.Center
+        };
+        Content = vsl;
+
         TapGestureRecognizer tap_kollane = new TapGestureRecognizer();
         tap_kollane.NumberOfTapsRequired = 1;
         kollane.GestureRecognizers.Add(tap_kollane);
         tap_kollane.Tapped += (sender, e) =>
         {
-            if (sisse)
+            if (sisse == true)
             {
                 status.Text = "Valmistu";
                 punane.Fill = new SolidColorBrush(Colors.Gray);
@@ -96,7 +90,7 @@ public partial class ValgufoorPage : ContentPage
         roheline.GestureRecognizers.Add(tap_roheline);
         tap_roheline.Tapped += (sender, e) =>
         {
-            if (sisse)
+            if (sisse == true)
             {
                 status.Text = "Sõida";
                 punane.Fill = new SolidColorBrush(Colors.Gray);
@@ -109,7 +103,7 @@ public partial class ValgufoorPage : ContentPage
         punane.GestureRecognizers.Add(tap_punane);
         tap_punane.Tapped += (sender, e) =>
         {
-            if (sisse)
+            if (sisse == true)
             {
                 status.Text = "Seisa";
                 punane.Fill = new SolidColorBrush(Colors.Red);
@@ -122,21 +116,52 @@ public partial class ValgufoorPage : ContentPage
 	{
 		Button nupp = sender as Button;
 
-        if (nupp.Text == "Sisse")
+        if (nupp.ZIndex == 0)
         {
             sisse = true;
-            status.Text = "Vali valgu";
+            status.Text = "Vali valgus";
+            this.BackgroundImageSource = null;
             punane.Fill = new SolidColorBrush(Colors.Red);
             kollane.Fill = new SolidColorBrush(Colors.Yellow);
             roheline.Fill = new SolidColorBrush(Colors.Green);
         }
-        else if (nupp.Text == "Välja")
+        else if (nupp.ZIndex == 1)
         {
             sisse = false;
             status.Text = "Lülita esmalt foor sisse";
             punane.Fill = new SolidColorBrush(Colors.Gray);
             kollane.Fill = new SolidColorBrush(Colors.Gray);
             roheline.Fill = new SolidColorBrush(Colors.Gray);
+        }
+        else if (nupp.ZIndex == 2)
+        {
+            punane.Fill = new SolidColorBrush(Colors.Yellow);
+            kollane.Fill = new SolidColorBrush(Colors.Yellow);
+            roheline.Fill = new SolidColorBrush(Colors.Yellow);
+            this.BackgroundImageSource = "night.jpg";
+            roheline.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = new Command(async () =>
+                {
+                    await Task.WhenAll(
+                        punane.ScaleToAsync(1.2, 150),
+                        punane.FadeToAsync(0.5, 150),
+                        kollane.ScaleToAsync(1.2, 150),
+                        kollane.FadeToAsync(0.5, 150),
+                        roheline.ScaleToAsync(1.2, 150),
+                        roheline.FadeToAsync(0.5, 150)
+                    );
+                    await Task.WhenAll(
+                        punane.ScaleToAsync(1.0, 150),
+                        punane.FadeToAsync(1.0, 150),
+                        roheline.ScaleToAsync(1.0, 150),
+                        roheline.FadeToAsync(1.0, 150),
+                        kollane.ScaleToAsync(1.0, 150),
+                        kollane.FadeToAsync(1.0, 150)
+                    );
+                    status.Text = "Seisa!";
+                })
+            });
         }
     }
 }
