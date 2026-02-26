@@ -22,7 +22,6 @@ public partial class VarviPage : ContentPage
 		{
 			Text = "RGB mudel",
 			FontSize = 30,
-			HorizontalOptions = LayoutOptions.Center
         };
 		AbsoluteLayout.SetLayoutBounds(title, new Rect(0.5, 0.05, -1, -1));
 		AbsoluteLayout.SetLayoutFlags(title, AbsoluteLayoutFlags.PositionProportional);
@@ -32,13 +31,13 @@ public partial class VarviPage : ContentPage
 		Frame boxG = CreateColorBox(Colors.Green);
 		Frame boxB = CreateColorBox(Colors.Blue);
 
-		AbsoluteLayout.SetLayoutBounds(boxR, new Rect(0.15, 0.15, 30, 30));
+		AbsoluteLayout.SetLayoutBounds(boxR, new Rect(0.1, 0.15, 30, 30));
 		AbsoluteLayout.SetLayoutFlags(boxR, AbsoluteLayoutFlags.PositionProportional);
 		
-		AbsoluteLayout.SetLayoutBounds(boxG, new Rect(0.15, 0.25, 30, 30));
+		AbsoluteLayout.SetLayoutBounds(boxG, new Rect(0.1, 0.25, 30, 30));
 		AbsoluteLayout.SetLayoutFlags(boxG, AbsoluteLayoutFlags.PositionProportional);
 
-		AbsoluteLayout.SetLayoutBounds(boxB, new Rect(0.15, 0.35, 30, 30));
+		AbsoluteLayout.SetLayoutBounds(boxB, new Rect(0.1, 0.35, 30, 30));
 		AbsoluteLayout.SetLayoutFlags(boxB, AbsoluteLayoutFlags.PositionProportional);
 		al.Children.Add(boxR);
 		al.Children.Add(boxG);
@@ -112,7 +111,7 @@ public partial class VarviPage : ContentPage
     }
 	void AddSliderRow(Slider slider, Label label, double y)
 	{
-		AbsoluteLayout.SetLayoutBounds(slider, new Rect(0.5, y, 300, -1));
+		AbsoluteLayout.SetLayoutBounds(slider, new Rect(0.5, y, 250, -1));
 		AbsoluteLayout.SetLayoutFlags(slider, AbsoluteLayoutFlags.PositionProportional);
 		al.Children.Add(slider);
 		AbsoluteLayout.SetLayoutBounds(label, new Rect(0.9, y,-1, -1));
@@ -129,6 +128,6 @@ public partial class VarviPage : ContentPage
 		lblB.Text = b.ToString();
 		colorFrame.BackgroundColor = Color.FromRgb(r, g, b);
 
-		colorFrame.CornerRadius = (float)stepper.Value;
+		colorFrame.CornerRadius = (int)stepper.Value;
     }
 }

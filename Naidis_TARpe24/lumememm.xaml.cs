@@ -130,9 +130,9 @@ public partial class lumememm : ContentPage
                 break;
 
             case "Sulata":
-                pea.FadeTo(0);
-                keha.FadeTo(0) ;
-                ämber.FadeTo(0);
+                pea.FadeToAsync(0);
+                keha.FadeToAsync(0) ;
+                ämber.FadeToAsync(0);
                 break;
 
             case "Tantsi":
@@ -144,16 +144,16 @@ public partial class lumememm : ContentPage
     {
         // Liikumine edasi
         await Task.WhenAll(
-            pea.TranslateTo(20, 0, 500),
-            keha.TranslateTo(20, 0, 500),
-            ämber.TranslateTo(20, 0, 500)
+            pea.TranslateToAsync(20, 0, 500),
+            keha.TranslateToAsync(20, 0, 500),
+            ämber.TranslateToAsync(20, 0, 500)
         );
 
         // Liikumine tagasi
         await Task.WhenAll(
-            pea.TranslateTo(-20, 0, 500),
-            keha.TranslateTo(-20, 0, 500),
-            ämber.TranslateTo(-20, 0, 500)
+            pea.TranslateToAsync(-20, 0, 500),
+            keha.TranslateToAsync(-20, 0, 500),
+            ämber.TranslateToAsync(-20, 0, 500)
         );
     }
 }
