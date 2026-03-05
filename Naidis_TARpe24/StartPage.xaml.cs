@@ -2,8 +2,27 @@ namespace Naidis_TARpe24;
 
 public partial class StartPage : ContentPage
 {
-	public List<ContentPage> lehed = new List<ContentPage>() { new TextPage(), new FigurePage(), new Timer_Page(), new ValgufoorPage(), new VarviPage(), new lumememm(), new Pop_Up_Page(), new PopUp_kasutamine() };
-	public List<string> lehedNimed = new List<string>() { "Tekst", "Kujund", "Timer", "Valgusfoor", "Värv", "Lumememm", "PopUp", "PopUp-Kasutamine" };
+	public List<ContentPage> lehed = new List<ContentPage>() 
+	{	//new TextPage(),
+		//new FigurePage(),
+		//new Timer_Page(),
+		new ValgufoorPage(),
+		new VarviPage(), 
+		new lumememm(), 
+		//new Pop_Up_Page(), 
+		new PopUp_kasutamine() 
+	};
+	public List<string> lehedNimed = new List<string>() 
+	{
+		//"Tekst", 
+		//"Kujund", 
+		//"Timer", 
+		"Valgusfoor", 
+		"Värv", 
+		"Lumememm", 
+		//"PopUp", 
+		"PopUp-Kasutamine" 
+	};
 	ScrollView sv;
 	VerticalStackLayout vst;
     public StartPage()
@@ -20,7 +39,7 @@ public partial class StartPage : ContentPage
 				BackgroundColor = Colors.White,
 				TextColor = Colors.Black,
 				CornerRadius = 10,
-				HeightRequest = 60,
+				HeightRequest = 70,
 				ZIndex = i
             };
 			vst.Add(nupp);
