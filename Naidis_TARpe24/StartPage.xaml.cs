@@ -64,6 +64,7 @@ public partial class StartPage : ContentPage
 		{
 			//Kustutame seadme mälust meie spetsiifilise võtme
 			Preferences.Default.Remove("EsimeneKäivitamine");
+			Preferences.Default.Remove("Username");
 			//Anname tagasisidet, et nullimine õnnestus
 			await DisplayAlertAsync("Edukalt nullitud", "Mälu on tühjendatud. Kui sa lehe uuesti avad, käitub äpp nagu täiesti uus!", "OK");
 		};

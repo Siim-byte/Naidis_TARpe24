@@ -4,7 +4,7 @@ public partial class PopUp_kasutamine : ContentPage
 {
 	public PopUp_kasutamine()
 	{
-        InitializeComponent();
+        //InitializeComponent();
         Button alertQuestButton = new Button
         {
             Text = "Arvuta",
@@ -55,10 +55,19 @@ public partial class PopUp_kasutamine : ContentPage
 
     private async void AlertQuestButton_Clicked(object sender, EventArgs e)
     {
-        string result1 = await DisplayPromptAsync("Vasta", "Millega võrdub 5 x 5?", initialValue: "", maxLength: 2, keyboard: Keyboard.Numeric);
-        if (result1 == "25")
+        Random rnd = new Random();
+        int a = rnd.Next(1, 11);
+        int b = rnd.Next(1, 11);
+
+        // Arvutame vastuse eraldi numbrina (int tüüp)
+        int vastus = a * b;
+
+        string m = await DisplayPromptAsync("Küsimus", $"Palju on {a} * {b}?");
+
+        // Muudame sisestatud teksti numbriks ja võrdleme
+        if (m == vastus.ToString())
         {
-            await DisplayAlertAsync("Õige", "vastus on 25.", "OK");
+            await DisplayAlertAsync("Õige", $"Vastus on {vastus}!", "OK");
         }
         else
         {
@@ -91,9 +100,23 @@ public partial class PopUp_kasutamine : ContentPage
     }
     private async void nameButton_Clicked(object sender, EventArgs e)
     {
-        string name = await DisplayPromptAsync("Vasta", "Mis on sinu nimi", keyboard: Keyboard.Chat);
-        await DisplayAlertAsync("Tervitus",$"Tere {name}!", "OK");
-        
+        string name = Preferences.Default.Get("UserName", "");
+        if (string.IsNullOrEmpty(name))
+        {
+            name = await DisplayPromptAsync("Vasta", "Mis on sinu nimi", keyboard: Keyboard.Chat);
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                Preferences.Default.Set("UserName", name);
+                await DisplayAlertAsync("Tervitus", $"Tere tulemast esmakordselt, {name}!", "OK");
+            }
+
+        }
+        else
+        {
+            await DisplayAlertAsync("Tervitus", $"Tere tagasi, {name}!", "OK");
+        }
+
     }
     private async void sheetButton_Clicked(object sender, EventArgs e)
     {
