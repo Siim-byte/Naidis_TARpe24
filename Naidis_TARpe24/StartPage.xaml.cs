@@ -11,7 +11,8 @@ public partial class StartPage : ContentPage
 		new lumememm(), 
 		//new Pop_Up_Page(), 
 		new PopUp_kasutamine(),
-		new PickerImageGridPage()
+		new PickerImageGridPage(),
+		new Triptrapstrull(),
 	};
 	public List<string> lehedNimed = new List<string>() 
 	{
@@ -23,7 +24,8 @@ public partial class StartPage : ContentPage
 		"Lumememm", 
 		//"PopUp", 
 		"PopUp-Kasutamine",
-		"PickerImageGrid"
+		"PickerImageGrid",
+		"Tripstrapstrull"	
 	};
 	ScrollView sv;
 	VerticalStackLayout vst;
