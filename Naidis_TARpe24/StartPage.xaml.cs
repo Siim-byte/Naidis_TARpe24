@@ -2,15 +2,16 @@ namespace Naidis_TARpe24;
 
 public partial class StartPage : ContentPage
 {
-	public List<ContentPage> lehed = new List<ContentPage>() 
+	public List<ContentPage> lehed = new List<ContentPage>()
 	{	//new TextPage(),
 		//new FigurePage(),
 		//new Timer_Page(),
 		new ValgufoorPage(),
-		new VarviPage(), 
+		new VarviPage(),
 		new lumememm(), 
 		//new Pop_Up_Page(), 
-		new PopUp_kasutamine() 
+		new PopUp_kasutamine(),
+		new PickerImageGridPage()
 	};
 	public List<string> lehedNimed = new List<string>() 
 	{
@@ -21,7 +22,8 @@ public partial class StartPage : ContentPage
 		"Värv", 
 		"Lumememm", 
 		//"PopUp", 
-		"PopUp-Kasutamine" 
+		"PopUp-Kasutamine",
+		"PickerImageGrid"
 	};
 	ScrollView sv;
 	VerticalStackLayout vst;
@@ -95,6 +97,7 @@ public partial class StartPage : ContentPage
 			}
 			// 3. Salvestame info, et esimene käivitamine on tehtud.
 			Preferences.Default.Set("EsimeneKäivitamine", false);
+			Preferences.Default.Set("Username", false);
 		}
 	}
 }

@@ -88,6 +88,9 @@
 	  <MauiXaml Update="Timer_Page.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Triptrapstrull.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="ValgufoorPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

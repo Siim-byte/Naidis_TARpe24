@@ -100,14 +100,14 @@ public partial class PopUp_kasutamine : ContentPage
     }
     private async void nameButton_Clicked(object sender, EventArgs e)
     {
-        string name = Preferences.Default.Get("UserName", "");
+        string name = Preferences.Default.Get("Username", "");
         if (string.IsNullOrEmpty(name))
         {
             name = await DisplayPromptAsync("Vasta", "Mis on sinu nimi", keyboard: Keyboard.Chat);
 
             if (!string.IsNullOrEmpty(name))
             {
-                Preferences.Default.Set("UserName", name);
+                Preferences.Default.Set("Username", name);
                 await DisplayAlertAsync("Tervitus", $"Tere tulemast esmakordselt, {name}!", "OK");
             }
 
