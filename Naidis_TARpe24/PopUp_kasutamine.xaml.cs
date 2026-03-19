@@ -58,8 +58,7 @@ public partial class PopUp_kasutamine : ContentPage
         Random rnd = new Random();
         int a = rnd.Next(1, 11);
         int b = rnd.Next(1, 11);
-
-        // Arvutame vastuse eraldi numbrina (int tüüp)
+        //tehe
         int vastus1 = a * b;
         int vastus2 = a + b;
         int vastus3 = a - b;
@@ -68,10 +67,9 @@ public partial class PopUp_kasutamine : ContentPage
 
         string m1 = await DisplayPromptAsync("Küsimus", $"Palju on {a} * {a}?");
         string m2 = await DisplayPromptAsync("Küsimus", $"Palju on {a} + {b}");
-        string m3 = await DisplayPromptAsync("Küsimus", $"Palju on {a} - {b}");
-        string m4 = await DisplayPromptAsync("Küsimus", $"Palju on {a} / {b}");
+        string m3 = await DisplayPromptAsync("Küsimus", $"Palju on {b} - {a}");
+        string m4 = await DisplayPromptAsync("Küsimus", $"Palju on {b} / {a}");
 
-        // Muudame sisestatud teksti numbriks ja võrdleme
         if (m1 == vastus1.ToString())
         {
             await DisplayAlertAsync("✅ Õige", $"Esimese küsimuse vastus on {vastus1}!", "OK");

@@ -1,8 +1,10 @@
+using System.Threading.Tasks;
+
 namespace Naidis_TARpe24;
 
 public partial class Triptrapstrull : ContentPage
 {
-    Grid gr4x1, gr3x3;
+    Grid gr4x2, gr3x3;
     Button btnUus, btnAlustaja;
     Label lblStaatus;
     string kord = "X";
@@ -11,7 +13,7 @@ public partial class Triptrapstrull : ContentPage
     List<Label> Ruudud = new List<Label>();
     public Triptrapstrull()
 	{
-        gr4x1 = new Grid
+        gr4x2 = new Grid
         {
             RowDefinitions =
             {
@@ -33,7 +35,7 @@ public partial class Triptrapstrull : ContentPage
         btnAlustaja.Clicked += (s, e) =>
         {
             kord = new Random().Next(0,2) == 0 ?  "X" : "O";
-            lblStaatus.Text = $"Alustab {kord}";
+            lblStaatus.Text = $"Alustab mängija {kord}";
         };
 
         btnUus = new Button
@@ -48,18 +50,55 @@ public partial class Triptrapstrull : ContentPage
             HorizontalOptions = LayoutOptions.Center,
             VerticalOptions = LayoutOptions.Center
         };
-
+        Button btnReeglid = new Button()
+        {
+            Text = "Reeglid",
+            VerticalOptions = LayoutOptions.Center,
+            HorizontalOptions = LayoutOptions.Center
+        };
+        btnReeglid.Clicked += Reeglid_Clicked;
+        Button btnTaust = new Button()
+        {
+            Text = "Tausta valik",
+            VerticalOptions = LayoutOptions.Center,
+            HorizontalOptions = LayoutOptions.Center
+        };
+        btnTaust.Clicked += Taustad_Clicked;
         LooManguvali();
 
-        gr4x1 .Add(btnAlustaja, 0, 0);
-        gr4x1 .Add (btnUus, 1, 0);
-        gr4x1.Add(lblStaatus, 0, 1);
-        gr4x1.SetColumnSpan(lblStaatus, 2);
-        gr4x1.Add(gr3x3 , 0, 2);
-        gr4x1.SetColumnSpan(gr3x3, 2);
+        gr4x2 .Add(btnAlustaja, 0, 0);
+        gr4x2 .Add (btnUus, 1, 0);
+        gr4x2.Add(btnReeglid, 2, 1);
+        gr4x2.Add(btnTaust, 2,2);            ///FIX GRID
+        gr4x2.Add(lblStaatus, 0, 2);
+        gr4x2.SetColumnSpan(lblStaatus, 3);
+        gr4x2.Add(gr3x3 , 0, 3);
+        gr4x2.SetColumnSpan(gr3x3, 3);
 
-        Content = gr4x1;
+        Content = gr4x2;
 
+    }
+    private async void Taustad_Clicked(object? sender, EventArgs e)
+    {
+        string Teema = await DisplayActionSheetAsync("Vali teema", "Loobu", "Null", "Tume", "Hele", "Suvaline");
+
+        if (Teema == "Tume")
+        {
+            this.BackgroundColor = Colors.Black;
+        }
+        else if (Teema == "Hele")
+        {
+            this.BackgroundColor = Colors.WhiteSmoke;
+        }
+        else if (Teema == "Suvaline")
+        {
+            Random rnd = new Random();
+            this.BackgroundColor = Color.FromRgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+        }
+    }
+    private async void Reeglid_Clicked(object sender, EventArgs e)
+    {
+        await DisplayAlertAsync("Reeglid", "Mängu võitmiseks on vaja saada diagonaalselt, horizontaalselt või vertikaalselt 3 ruudu sinu märgiga X või O", "OK");
     }
     private void LooManguvali()
     {
@@ -118,7 +157,7 @@ public partial class Triptrapstrull : ContentPage
             return;
         }
         kord = kord == "X" ? "O" : "X";
-        lblStaatus.Text = $"Mängija {kord}";
+        lblStaatus.Text = $"Mängija {kord} kord";
     }
     private void UusMang(object? sender, EventArgs e)
     {
@@ -156,4 +195,4 @@ public partial class Triptrapstrull : ContentPage
         foreach (var l in symbols) if (string.IsNullOrEmpty(l.Text)) return false;
         return true;
     }
-}
+}//vaja teha botiga mang 
