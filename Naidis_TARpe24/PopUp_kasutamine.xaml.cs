@@ -1,4 +1,4 @@
-namespace Naidis_TARpe24;
+﻿namespace Naidis_TARpe24;
 
 public partial class PopUp_kasutamine : ContentPage
 {
@@ -15,7 +15,7 @@ public partial class PopUp_kasutamine : ContentPage
 
         Button mButton = new Button
         {
-            Text = "M�istatus",
+            Text = "Mõistatus",
             VerticalOptions = LayoutOptions.Start,
             HorizontalOptions = LayoutOptions.Center
         };
@@ -23,7 +23,7 @@ public partial class PopUp_kasutamine : ContentPage
 
         Button visualMButton = new Button
         {
-            Text = "Visuaalne m�istatus",
+            Text = "Visuaalne mõistatus",
             VerticalOptions = LayoutOptions.Start,
             HorizontalOptions = LayoutOptions.Center
         };
@@ -47,8 +47,8 @@ public partial class PopUp_kasutamine : ContentPage
 
         Content = new VerticalStackLayout()
         {
-            Spacing = 20,//j�tab nuppude vahele 20 pikslit vaba ruumi
-            Padding = new Thickness(0, 50, 0, 0), //l�kkab sisu veidi �levalt alla
+            Spacing = 20,//jätab nuppude vahele 20 pikslit vaba ruumi
+            Padding = new Thickness(0, 50, 0, 0), //lükkab sisu veidi ülevalt alla
             Children = { alertQuestButton, mButton, visualMButton, nameButton, sheetButton }
         };
     }
@@ -59,27 +59,58 @@ public partial class PopUp_kasutamine : ContentPage
         int a = rnd.Next(1, 11);
         int b = rnd.Next(1, 11);
 
-        // Arvutame vastuse eraldi numbrina (int t��p)
-        int vastus = a * b;
+        // Arvutame vastuse eraldi numbrina (int tüüp)
+        int vastus1 = a * b;
+        int vastus2 = a + b;
+        int vastus3 = a - b;
+        int vastus4 = a / b;
 
-        string m = await DisplayPromptAsync("K�simus", $"Palju on {a} * {b}?");
 
-        // Muudame sisestatud teksti numbriks ja v�rdleme
-        if (m == vastus.ToString())
+        string m1 = await DisplayPromptAsync("Küsimus", $"Palju on {a} * {a}?");
+        string m2 = await DisplayPromptAsync("Küsimus", $"Palju on {a} + {b}");
+        string m3 = await DisplayPromptAsync("Küsimus", $"Palju on {a} - {b}");
+        string m4 = await DisplayPromptAsync("Küsimus", $"Palju on {a} / {b}");
+
+        // Muudame sisestatud teksti numbriks ja võrdleme
+        if (m1 == vastus1.ToString())
         {
-            await DisplayAlertAsync("�ige", $"Vastus on {vastus}!", "OK");
+            await DisplayAlertAsync("✅ Õige", $"Esimese küsimuse vastus on {vastus1}!", "OK");
         }
         else
         {
-            await DisplayAlertAsync("Vale", "Proovi uuesti", "OK");
+            await DisplayAlertAsync("❎ Vale", "Proovi esimene küsimus uuesti ", "OK");
+        }
+        if (m2 == vastus2.ToString())
+        {
+            await DisplayAlertAsync("✅ Õige", $"Teise küsimuse vastus on {vastus2}!", "OK");
+        }
+        else
+        {
+            await DisplayAlertAsync("❎ Vale", "Proovi teine küsimus uuesti ", "OK");
+        }
+        if (m3 == vastus3.ToString())
+        {
+            await DisplayAlertAsync("✅ Õige", $"Kolmanda küsimuse vastus on {vastus3}!", "OK");
+        }
+        else
+        {
+            await DisplayAlertAsync("❎ Vale", "Proovi kolmas küsimus uuesti ", "OK");
+        }
+        if (m4 == vastus4.ToString())
+        {
+            await DisplayAlertAsync("✅ Õige", $"neljanda küsimuse vastus on {vastus4}!", "OK");
+        }
+        else
+        {
+            await DisplayAlertAsync("❎ Vale", "Proovi neljas küsimus uuesti ", "OK");
         }
     }
     private async void mButton_Clicked(object? sender, EventArgs e)
     {
-        bool ans = await DisplayAlertAsync("Vasta", "Mis v�rvi on ��", "Must", "Valge");
+        bool ans = await DisplayAlert("Vasta", "Mis värvi on öö", "Must", "Valge");
         if (ans == true)
         {
-            await DisplayAlertAsync("�ige", "Vastus on must", "OK");
+            await DisplayAlertAsync("Õige", "Vastus on must", "OK");
         }
         else
         {
@@ -88,10 +119,10 @@ public partial class PopUp_kasutamine : ContentPage
     }
     private async void visualMButton_Clicked(object? sender, EventArgs e)
     {
-        string ans = await DisplayPromptAsync("M�istatus", "Mis k�nnib ��sel ja p�eval kahel jalal", keyboard: Keyboard.Text);
+        string ans = await DisplayPromptAsync("Mõistatus", "Mis kõnnib öösel ja päeval kahel jalal", keyboard: Keyboard.Text);
         if (ans == "Kass")
         {
-            await DisplayAlertAsync("�ige", "Vastus on kass.", "OK");
+            await DisplayAlertAsync("Õige", "Vastus on Kass.", "OK");
         }
         else
         {
@@ -120,15 +151,15 @@ public partial class PopUp_kasutamine : ContentPage
     }
     private async void sheetButton_Clicked(object sender, EventArgs e)
     {
-        string alaleht = await DisplayActionSheetAsync("Vali alaleht", "Loobu", "Null", "Valgusfoor", "V�rv", "Lumememm");
+        string alaleht = await DisplayActionSheetAsync("Vali alaleht", "Loobu", "Null", "Valgusfoor", "Värv", "Lumememm");
         if (alaleht == "Valgusfoor")
         {
             await DisplayAlertAsync("Valitud leht", "Valgusfoor", "OK");
             await Navigation.PushAsync(new ValgufoorPage());
         }
-        else if (alaleht == "V�rv")
+        else if (alaleht == "Värv")
         {
-            await DisplayAlertAsync("Valtiud leht", "V�rvi leht", "OK");
+            await DisplayAlertAsync("Valtiud leht", "Värvi leht", "OK");
             await Navigation.PushAsync(new VarviPage());
         }
         else if (alaleht == "Lumememm")
