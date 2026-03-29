@@ -17,16 +17,18 @@ public partial class Triptrapstrull : ContentPage
         {
             RowDefinitions =
             {
-                new RowDefinition{Height=new GridLength(1, GridUnitType.Star)},
-                new RowDefinition{Height=new GridLength(1, GridUnitType.Star)},
-                new RowDefinition{Height=new GridLength(6, GridUnitType.Star)},
-                new RowDefinition{Height=new GridLength(1, GridUnitType.Star)}
+                new RowDefinition { Height = GridLength.Auto },
+                new RowDefinition { Height = GridLength.Auto },
+                new RowDefinition { Height = new GridLength(1, GridUnitType.Star) }, 
+                new RowDefinition { Height = GridLength.Auto } 
             },
-            ColumnDefinitions =
+                    ColumnDefinitions =
             {
-                new ColumnDefinition{Width=new GridLength(1, GridUnitType.Star)},
-                new ColumnDefinition{Width=new GridLength(1, GridUnitType.Star)}
-            }
+                new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+                new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+                new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
+            },
+            Padding = 10
         };
         btnAlustaja = new Button
         {
@@ -66,14 +68,15 @@ public partial class Triptrapstrull : ContentPage
         btnTaust.Clicked += Taustad_Clicked;
         LooManguvali();
 
-        gr4x2 .Add(btnAlustaja, 0, 0);
-        gr4x2 .Add (btnUus, 1, 0);
-        gr4x2.Add(btnReeglid, 2, 1);
-        gr4x2.Add(btnTaust, 2,2);            ///FIX GRID
-        gr4x2.Add(lblStaatus, 0, 2);
-        gr4x2.SetColumnSpan(lblStaatus, 3);
-        gr4x2.Add(gr3x3 , 0, 3);
-        gr4x2.SetColumnSpan(gr3x3, 3);
+        gr4x2.Add(btnAlustaja, 0, 0);
+        //gr4x2.Add(btnBot, 1, 0);
+        gr4x2.Add(btnUus, 2, 0);
+        gr4x2.Add(lblStaatus, 0, 1);
+        Grid.SetColumnSpan(lblStaatus, 3);
+        gr4x2.Add(gr3x3, 0, 2);
+        Grid.SetColumnSpan(gr3x3, 3);
+        gr4x2.Add(btnReeglid, 0, 3);
+        gr4x2.Add(btnTaust, 2, 3);
 
         Content = gr4x2;
 
