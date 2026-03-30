@@ -198,4 +198,4 @@ public partial class Triptrapstrull : ContentPage
         foreach (var l in symbols) if (string.IsNullOrEmpty(l.Text)) return false;
         return true;
     }
-}//vaja teha botiga mang 
+} 
