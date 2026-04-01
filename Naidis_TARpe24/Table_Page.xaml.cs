@@ -6,10 +6,26 @@ public partial class Table_Page : ContentPage
     SwitchCell sc;
     ImageCell ic;
     TableSection fotosection;
+    EntryCell emailEntry;
+    EntryCell phoneEntry;
+    EntryCell nimiEntry;
+    EntryCell kirjeldusEntry;
     public Table_Page()
     {
-        sc = new SwitchCell { Text = "Näita veel" };
+        sc = new SwitchCell { Text = "Näita pilti" };
         sc.OnChanged += Sc_OnChanged;
+        phoneEntry = new EntryCell
+        {
+            Label = "Telefon",
+            Placeholder = "Sisesta tel. number",
+            Keyboard = Keyboard.Telephone
+        };
+        emailEntry = new EntryCell
+        {
+            Label = "Email",
+            Placeholder = "Sisesta email",
+            Keyboard = Keyboard.Email
+        };
         ic = new ImageCell
         {
             ImageSource = ImageSource.FromFile("bob.jpg"),
@@ -24,19 +40,15 @@ public partial class Table_Page : ContentPage
             {
                 new TableSection("Kontaktandmed:")
                 {
-                    new EntryCell
-                    {
-                        Label="Telefon",
-                        Placeholder="Sisesta tel. number",
-                        Keyboard=Keyboard.Telephone
-                    },
-                    new EntryCell
-                    {
-                        Label="Email",
-                        Placeholder="Sisesta email",
-                        Keyboard=Keyboard.Email
-                    },
+                    phoneEntry,
+                    emailEntry,
                     sc
+                },
+                new TableSection("Tegevused:")
+                {
+                    new TextCell { Text = "Saada SMS", Command = new Command(Saada_sms_Clicked) },
+                    new TextCell { Text = "Saada Email", Command = new Command(Saada_email_Clicked) },
+                    new TextCell { Text = "Helista", Command = new Command(Helista_Clicked) }
                 },
                 fotosection
             }
@@ -60,9 +72,9 @@ public partial class Table_Page : ContentPage
             sc.Text = "Näita veel";
         }
     }
-    private async void Saada_sms_Clicked(object? sender, EventArgs e)
+    private async void Saada_sms_Clicked()
     {
-        string phone = email_phone.Text;
+        string phone = phoneEntry.Text;
         var message = "Tere tulemast! Saadan sõnumi";
         SmsMessage sms = new SmsMessage(message, phone);
         if (phone != null && Sms.Default.IsComposeSupported)
@@ -70,16 +82,16 @@ public partial class Table_Page : ContentPage
             await Sms.Default.ComposeAsync(sms);
         }
     }
-    private async void Saada_email_Clicked(object? sender, EventArgs e)
+    private async void Saada_email_Clicked()
     {
-        if (string.IsNullOrWhiteSpace(email_phone.Text)) return;
+        if (string.IsNullOrWhiteSpace(emailEntry.Text)) return;
         var message = "Tere tulemast! Saadan email";
         EmailMessage e_mail = new EmailMessage()
         {
-            Subject = email_phone.Text,
+            Subject = emailEntry.Text,
             Body = message,
             BodyFormat = EmailBodyFormat.PlainText,
-            To = new List<string>(new[] {email_phone.Text})
+            To = new List<string>(new[] {emailEntry.Text})
         };
         if (Email.Default.IsComposeSupported)
         {
@@ -89,6 +101,18 @@ public partial class Table_Page : ContentPage
         {
             await DisplayAlertAsync("Viga", "Emaili saadmine pole selles seadmes toetatud", "OK");
         }
+    }
+    private async void Helista_Clicked()
+    {
+        string phone = phoneEntry.Text;
+        if (!string.IsNullOrWhiteSpace(phone))
+        {
+            if (PhoneDialer.Default.IsSupported)
+            {
+                PhoneDialer.Default.Open(phone);
+            }
+        }
+        
     }
 }
 
