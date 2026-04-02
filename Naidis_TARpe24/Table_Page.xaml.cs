@@ -14,17 +14,11 @@ public partial class Table_Page : ContentPage
     {
         sc = new SwitchCell { Text = "Näita pilti" };
         sc.OnChanged += Sc_OnChanged;
-        phoneEntry = new EntryCell
+        nimiEntry = new EntryCell()
         {
-            Label = "Telefon",
-            Placeholder = "Sisesta tel. number",
-            Keyboard = Keyboard.Telephone
-        };
-        emailEntry = new EntryCell
-        {
-            Label = "Email",
-            Placeholder = "Sisesta email",
-            Keyboard = Keyboard.Email
+            Label = "Nimi",
+            Placeholder = "Sisesta nimi",
+            Keyboard = Keyboard.Chat
         };
         ic = new ImageCell
         {
@@ -32,6 +26,25 @@ public partial class Table_Page : ContentPage
             Text = "Foto nimetus",
             Detail = "Foto kirjeldus"
         };
+        emailEntry = new EntryCell
+        {
+            Label = "Email",
+            Placeholder = "Sisesta email",
+            Keyboard = Keyboard.Email
+        };
+        phoneEntry = new EntryCell
+        {
+            Label = "Telefon",
+            Placeholder = "Sisesta tel. number",
+            Keyboard = Keyboard.Telephone
+        };
+        kirjeldusEntry = new EntryCell()
+        {
+            Label = "Kirjeldus",
+            Placeholder = "Sisesta kirjeldus",
+            Keyboard = Keyboard.Chat
+        };
+
         fotosection = new TableSection();
 
         tabelView = new TableView
@@ -40,8 +53,11 @@ public partial class Table_Page : ContentPage
             {
                 new TableSection("Kontaktandmed:")
                 {
-                    phoneEntry,
+                    nimiEntry,
+                    ic,
                     emailEntry,
+                    phoneEntry,
+                    kirjeldusEntry,
                     sc
                 },
                 new TableSection("Tegevused:")
@@ -75,7 +91,7 @@ public partial class Table_Page : ContentPage
     private async void Saada_sms_Clicked()
     {
         string phone = phoneEntry.Text;
-        var message = "Tere tulemast! Saadan sõnumi";
+        var message = $"Tere tulemast {nimiEntry.Text}! Saadan sõnumi: {kirjeldusEntry.Text}";
         SmsMessage sms = new SmsMessage(message, phone);
         if (phone != null && Sms.Default.IsComposeSupported)
         {
@@ -85,7 +101,7 @@ public partial class Table_Page : ContentPage
     private async void Saada_email_Clicked()
     {
         if (string.IsNullOrWhiteSpace(emailEntry.Text)) return;
-        var message = "Tere tulemast! Saadan email";
+        var message = $"Tere tulemast{nimiEntry.Text}! Saadan email: {kirjeldusEntry.Text}";
         EmailMessage e_mail = new EmailMessage()
         {
             Subject = emailEntry.Text,
