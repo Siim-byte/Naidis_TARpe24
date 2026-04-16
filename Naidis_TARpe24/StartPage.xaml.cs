@@ -14,7 +14,9 @@ public partial class StartPage : ContentPage
 		new PickerImageGridPage(),
 		new Triptrapstrull(),
 		new Table_Page(),
-	};
+		//new ListViewPage(),
+		new EuroopaRiigid(),
+    };
 	public List<string> lehedNimed = new List<string>() 
 	{
 		//"Tekst", 
@@ -27,8 +29,10 @@ public partial class StartPage : ContentPage
 		"PopUp-Kasutamine",
 		"PickerImageGrid",
 		"Tripstrapstrull",
-		"Table"
-	};
+		"Table",
+        //"ListView",
+        "Euroopa riigid",
+    };
 	ScrollView sv;
 	VerticalStackLayout vst;
     public StartPage()
