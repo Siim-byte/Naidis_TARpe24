@@ -16,6 +16,7 @@ public partial class StartPage : ContentPage
 		new Table_Page(),
 		//new ListViewPage(),
 		new EuroopaRiigid(),
+		new KarussellPage(),
     };
 	public List<string> lehedNimed = new List<string>() 
 	{
@@ -32,6 +33,7 @@ public partial class StartPage : ContentPage
 		"Table",
         //"ListView",
         "Euroopa riigid",
+		"Karussell",
     };
 	ScrollView sv;
 	VerticalStackLayout vst;

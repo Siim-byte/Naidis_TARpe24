@@ -181,6 +181,10 @@ public partial class EuroopaRiigid : ContentPage
     private void BtnLisa_Clicked(object? sender, EventArgs e)
     {
         string uusNimi = entryNimi.Text;
+        if (!string.IsNullOrWhiteSpace(entryNimi.Text) && !string.IsNullOrWhiteSpace(entryPealinn.Text))
+        {
+            DisplayAlertAsync("Viga", "Palun täida vähemalt riigi ja pealinna väljad!", "OK");
+        }
 
         // LINQ abil on väga lihtne kontrollida, kas nimekirjas leidub juba selline nimi
         // StringComparison.OrdinalIgnoreCase tagab, et "Eesti" ja "eesti" loetakse samaks
@@ -191,14 +195,6 @@ public partial class EuroopaRiigid : ContentPage
             DisplayAlert("Viga", "See riik on juba nimekirjas!", "OK");
             return;
         }
-        else
-        {
-            // Lisame uue riigi, kui seda veel polnud
-            riigid.Add(new Riik { Nimi = uusNimi, Pealinn = entryPealinn.Text /* jne */ });
-        }
-
-        if (!string.IsNullOrWhiteSpace(entryNimi.Text) && !string.IsNullOrWhiteSpace(entryPealinn.Text))
-        {
             int rahvaarv = 0;
             int.TryParse(entryRahvaarv.Text, out rahvaarv);
 
@@ -218,11 +214,7 @@ public partial class EuroopaRiigid : ContentPage
             entryPealinn.Text = "";
             entryRahvaarv.Text = "";
             entryLipp.Text = "";
-        }
-        else
-        {
-            DisplayAlertAsync("Viga", "Palun täida vähemalt riigi ja pealinna väljad!", "OK");
-        }
+        
     }
     private void BtnMuuda_Clicked(object sender, EventArgs e)
     {
