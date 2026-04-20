@@ -7,7 +7,7 @@ namespace Naidis_TARpe24
         public App()
         {
             InitializeComponent();
-            //MainPage=new NavigationPage(new AppShell());
+            //MainPage = new AppShell();
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
