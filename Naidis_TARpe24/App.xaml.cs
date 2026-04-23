@@ -8,6 +8,8 @@ namespace Naidis_TARpe24
         {
             InitializeComponent();
             //MainPage = new AppShell();
+            var savedLanguage = Preferences.Get("AppLanguage", "en");
+            Services.LanguageService.ChangeLanguage(savedLanguage);
         }
 
         protected override Window CreateWindow(IActivationState? activationState)

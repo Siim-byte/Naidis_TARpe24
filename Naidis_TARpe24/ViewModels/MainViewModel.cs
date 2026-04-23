@@ -1,4 +1,4 @@
-﻿using Naidis_TARpe24.Resources.Localization;
+﻿using Naidis_TARpe24.Localization;
 using Naidis_TARpe24.Services;
 using System;
 using System.Collections.Generic;
@@ -16,7 +16,6 @@ namespace Naidis_TARpe24.ViewModels
         public string Greeting => AppResources.GreetingText;
         public string ChangeLanguageLabel => AppResources.ChangeLanguage;
         public string EnglishButton => AppResources.EnglishButton;
-        public string RussianButton => AppResources.RussianButton;
         public string EstonianButton => AppResources.EstonianButton;
 
         public ICommand SetEnglishCommand { get; }
@@ -42,7 +41,6 @@ namespace Naidis_TARpe24.ViewModels
             OnPropertyChanged(nameof(Greeting));
             OnPropertyChanged(nameof(ChangeLanguageLabel));
             OnPropertyChanged(nameof(EnglishButton));
-            OnPropertyChanged(nameof(RussianButton));
             OnPropertyChanged(nameof(EstonianButton));
         }
 

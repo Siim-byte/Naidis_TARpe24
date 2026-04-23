@@ -1,4 +1,4 @@
-﻿using Naidis_TARpe24.Resources.Localization;
+﻿using Naidis_TARpe24.Localization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

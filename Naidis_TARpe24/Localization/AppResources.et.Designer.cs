@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Naidis_TARpe24.Resources.Localization {
+namespace Naidis_TARpe24.Localization {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Naidis_TARpe24.Resources.Localization {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class AppResources {
+    public class AppResources___Copy__2_ {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AppResources() {
+        internal AppResources___Copy__2_() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Naidis_TARpe24.Resources.Localization {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Naidis_TARpe24.Resources.Localization.AppResources", typeof(AppResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Naidis_TARpe24.Localization.AppResources - Copy (2)", typeof(AppResources___Copy__2_).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,11 @@ namespace Naidis_TARpe24.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change Language.
-        /// </summary>
-        public static string ChangeLanguage {
-            get {
-                return ResourceManager.GetString("ChangeLanguage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to English.
-        /// </summary>
-        public static string EnglishButton {
-            get {
-                return ResourceManager.GetString("EnglishButton", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Estonian.
-        /// </summary>
-        public static string EstonianButton {
-            get {
-                return ResourceManager.GetString("EstonianButton", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Hello, World!.
+        ///   Looks up a localized string similar to Hello!.
         /// </summary>
         public static string GreetingText {
             get {
                 return ResourceManager.GetString("GreetingText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Russian.
-        /// </summary>
-        public static string RussianButton {
-            get {
-                return ResourceManager.GetString("RussianButton", resourceCulture);
             }
         }
     }
