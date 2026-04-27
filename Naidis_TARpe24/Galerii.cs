@@ -220,6 +220,16 @@ public class Galerii : ContentPage
 
         });
 
+        var addLanguage = new Button
+        {
+            Text = "Lisa uus keel",
+            BackgroundColor = Colors.BlueViolet,
+            TextColor = Colors.White,
+            CornerRadius = 10,
+            Margin = new Thickness(0, 10),
+            Command = new Command(async () => await AddNewLanguage())
+        };
+
 
 
         Content = new ScrollView
@@ -230,7 +240,7 @@ public class Galerii : ContentPage
 
                 Padding = 20,
 
-                Spacing = 20, // Jätab elementide vahele ilusa tühimiku
+                Spacing = 20,
 
                 Children =
 
@@ -238,6 +248,7 @@ public class Galerii : ContentPage
                     languageStack,
                     carouselView,
                     indicatorView,
+                    addLanguage,
 
 
 
@@ -270,6 +281,33 @@ public class Galerii : ContentPage
         AppResources.Culture = culture;
 
         Application.Current.MainPage = new NavigationPage(new Galerii());
+    }
+    private async Task AddNewLanguage()
+    {
+        string title = await DisplayPromptAsync("Uus keel", "Sisesta programmeerimiskeele nimi :");
+        if (string.IsNullOrWhiteSpace(title)) return;
+
+        string url = await DisplayPromptAsync("Pildi URL", "Kleebi siia pildi otselink (optional)):");
+        if (string.IsNullOrWhiteSpace(url))
+        {
+            url = "https://picsum.photos/200/300" + title;
+        }
+
+        string desc = await DisplayPromptAsync("Kirjeldus", $"Sisesta lühike kirjeldus keelele {title}:");
+        if (string.IsNullOrWhiteSpace(desc)) desc = "Kasutaja lisatud keel.";
+
+        string code = await DisplayPromptAsync("Hello World", "Sisesta hello world näidiskood:");
+        if (string.IsNullOrWhiteSpace(code));
+
+        items.Add(new CarouselItem
+        {
+            Title = title,
+            ImageUrl = url,
+            Description = desc,
+            HelloWorld = code
+        });
+
+        carouselView.Position = items.Count - 1;
     }
 
 }
